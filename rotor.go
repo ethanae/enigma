@@ -27,7 +27,7 @@ func (rotor *Rotor) Encrypt(letter string, alphabet string) string {
 			return string(rotor.wiring[i])
 		}
 	}
-	return ""
+	return letter
 }
 
 func (rotor *Rotor) SetRingByLetter(letter string, alphabet string) {
