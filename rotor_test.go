@@ -1,55 +1,61 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+func TestRotateAndEncodeLRA(t *testing.T) {
+	r := Rotor{
+		in: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		out: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+	}
 
-func TestSetRingByLetterA(t *testing.T) {
-	const answer = "FLNGMHERWAOUPXZIYVTQBJCSDK"
-	const ringSetting = "B"
-	rotor := Rotor{ wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ" }
+	outIndex := r.EncodeLR(3)
 
-	rotor.SetRingByLetter(ringSetting, alphabet)
-
-	if rotor.ringSetting != ringSetting {
-		t.Errorf("Got %s, expected %s", rotor.ringSetting, ringSetting)
-	} else if rotor.wiring != answer {
-		t.Errorf("Got %s, expected %s", rotor.wiring, answer)
+	expected := alphabet[1]
+	actual := alphabet[outIndex]
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
 	}
 }
 
-func TestSetRingByLetterC(t *testing.T) {
-	const answer = "GMOHNIFSXBPVQYAJZWURCKDTEL"
-	const ringSetting = "C"
-	rotor := Rotor{ wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ" }
+func TestRotateTwiceAndEncodeLRA(t *testing.T) {
+	r := Rotor{
+		in: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		out: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+	}
 
-	rotor.SetRingByLetter(ringSetting, alphabet)
+	r.Rotate()
+	r.Rotate()
+	outIndex := r.EncodeLR(25)
+
+	expected := alphabet[24]
+	actual := alphabet[outIndex]
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
+
+func TestRotateTwiceAndEncodeRLA(t *testing.T) {
+	r := Rotor{
+		in: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		out: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+	}
+
+	r.Rotate()
+	outIndex1 := r.EncodeRL(0)
+	r.Rotate()
+	outIndex2 := r.EncodeRL(0)
 	
-	if rotor.ringSetting != ringSetting {
-		t.Errorf("Got %s, expected %s", rotor.ringSetting, ringSetting)
-	} else if rotor.wiring != answer {
-		t.Errorf("Got %s, expected %s", rotor.wiring, answer)
+	expected1 := alphabet[2]
+	actual1 := alphabet[outIndex1]
+	if actual1 != expected1 {
+		t.Errorf("Expected %s, received %s", string(expected1), string(actual1))
 	}
-}
 
-func TestEncryptA(t *testing.T) {
-	expected := "E"
-	rotor := Rotor{ wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ" }
-
-	actual := rotor.Encrypt("A", alphabet)
-
-	if actual != expected {
-		t.Errorf("Expected %s, but received %s", expected, actual)
-	}
-}
-
-func TestEncryptZ(t *testing.T) {
-	expected := "J"
-	rotor := Rotor{ wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ" }
-
-	actual := rotor.Encrypt("Z", alphabet)
-
-	if actual != expected {
-		t.Errorf("Expected %s, but received %s", expected, actual)
+	expected2 := alphabet[3]
+	actual2 := alphabet[outIndex2]
+	if actual2 != expected2 {
+		t.Errorf("Expected %s, received %s", string(expected2), string(actual2))
 	}
 }

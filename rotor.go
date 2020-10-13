@@ -11,11 +11,9 @@ type Rotor struct {
 
 func (r *Rotor) EncodeRL(index int) int {
 	outChar := rune(r.out[index])
-
 	for i, v := range r.in {
 		if v == outChar {
-			println("outchar", string(outChar))
-			fmt.Printf("Enter at %s, exit at %s", string(r.out[i]), string(outChar))
+			fmt.Printf("Enter at %s, exit at %s\n", string(r.in[index]), string(outChar))
 			return i
 		}
 	}
@@ -27,7 +25,7 @@ func (r *Rotor) EncodeLR(index int) int {
 	inChar := rune(r.in[index])
 	for i, v := range r.out {
 		if v == inChar {
-			fmt.Printf("Enter at %s, exit at %s", string(inChar), string(r.in[i]))
+			fmt.Printf("Enter at %s, exit at %s\n", string(inChar), string(r.in[i]))
 			return i
 		}
 	}
