@@ -1,54 +1,41 @@
 package main
 
 import (
-	"strings"
+	"fmt"
 )
 
 type Rotor struct {
-	ringSetting	string
-	notch string
-	position string
-	wiring string
+	in string
+	out string
 }
 
-func (rotor *Rotor) Rotate(alphabet string) bool {
-	posRune := []rune(rotor.position)[0]
-	index := (posRune - 'A' + 1) % int32(len(alphabet))
-	rotor.position = string(alphabet[index])
-	if rotor.position == rotor.notch {
-		return true
-	}
-	return false
-}
+func (r *Rotor) EncodeRL(index int) int {
+	outChar := rune(r.out[index])
 
-func (rotor *Rotor) Encrypt(letter string, alphabet string) string {
-	for i, value := range alphabet {
-		if letter == string(value) {
-			return string(rotor.wiring[i])
+	for i, v := range r.in {
+		if v == outChar {
+			println("outchar", string(outChar))
+			fmt.Printf("Enter at %s, exit at %s", string(r.out[i]), string(outChar))
+			return i
 		}
 	}
-	return letter
+
+	return -1
 }
 
-func (rotor *Rotor) SetRingByLetter(letter string, alphabet string) {
-	// get this distance of the desired setting provided by "letter"
-	// then get the position of "letter" in "alphabet" which is the shift value
-	// shift the rotor's wiring based on the shift and modulo to prevent overflows
-	rotor.ringSetting = letter
-	var shift int32 = 0
-	for _, value := range alphabet {
-		if string(value) == letter {
-			break
+func (r *Rotor) EncodeLR(index int) int {
+	inChar := rune(r.in[index])
+	for i, v := range r.out {
+		if v == inChar {
+			fmt.Printf("Enter at %s, exit at %s", string(inChar), string(r.in[i]))
+			return i
 		}
-		shift++
 	}
-	shiftedAlphabet := []string{}
-	alphabetLen := len(alphabet)
-	firstAlphabetRune := rune(alphabet[0])
-	for _, value := range rotor.wiring {
-		index := (value - firstAlphabetRune + shift) % int32(alphabetLen)
-		shiftedChar := string(alphabet[index])
-		shiftedAlphabet = append(shiftedAlphabet, shiftedChar)
-	}
-	rotor.wiring = strings.Join(shiftedAlphabet, "")
+
+	return -1
+}
+
+func (r *Rotor) Rotate() {
+	r.in = r.in[1:] + string(r.in[0])
+	r.out = r.out[1:] + string(r.out[0])
 }
