@@ -34,15 +34,20 @@ func (r *Rotor) EncodeLR(index int) int {
 	return -1
 }
 
-func (r *Rotor) Rotate() bool {
-	firstAlphaChar := string(r.in[0])
-	r.in = r.in[1:] + firstAlphaChar
+func (r *Rotor) Rotate() bool { 
+	r.in = r.in[1:] + string(r.in[0])
 	r.out = r.out[1:] + string(r.out[0])
 
-	return firstAlphaChar == r.turnover
+	return string(r.in[0]) == r.turnover
 }
 
-func NewRotor(alphabet string, wiring string, ringSetting string, turnover string) Rotor {
+func NewRotor(
+	alphabet string,
+	startAt string,
+	wiring string,
+	ringSetting string,
+	turnover string,
+	) Rotor {
 	var shift int32 = 0
 	for _, value := range alphabet {
 		if string(value) == ringSetting {
@@ -60,7 +65,6 @@ func NewRotor(alphabet string, wiring string, ringSetting string, turnover strin
 			dotPosition = (i + int(shift)) % alphabetLen
 		}
 		index := (value - firstAlphabetRune + shift) % int32(alphabetLen)
-		println("index", index, "char", string(value))
 		shiftedChar := string(alphabet[index])
 		shiftedWiring += shiftedChar
 	}
@@ -69,9 +73,16 @@ func NewRotor(alphabet string, wiring string, ringSetting string, turnover strin
 		shiftedWiring = shiftedWiring[1:] + shiftedWiring[0:1]
 	}
 
-	return Rotor{
+	rotor := Rotor{
 		in: alphabet,
 		out: shiftedWiring,
 		turnover: turnover,
 	}
+
+	// shift rotor to the correct starting position
+	for string(rotor.in[0]) != startAt {
+		rotor.Rotate()
+	}
+
+	return rotor
 }

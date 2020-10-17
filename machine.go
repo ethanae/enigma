@@ -27,7 +27,10 @@ func (e *Enigma) EncryptMessage(message string) string {
 
 		for i := rotorCount - 1; i > -1; i-- {
 			if i == rotorCount - 1 {
-				rotors[i].Rotate()
+				if rotors[i].Rotate() {
+					// turn next rotors
+					e.HandleNotchRotations(i - 1)
+				}
 			}
 			index = rotors[i].EncodeRL(index)
 		}
@@ -42,6 +45,12 @@ func (e *Enigma) EncryptMessage(message string) string {
 	}
 
 	return cipher
+}
+
+func (e *Enigma) HandleNotchRotations(rotorToTurn int) {
+	if e.rotors[rotorToTurn].Rotate() {
+		e.HandleNotchRotations(rotorToTurn - 1)
+	}
 }
 
 func (e *Enigma) Reflect(index int) int {
