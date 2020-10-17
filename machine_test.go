@@ -10,25 +10,25 @@ func TestMachineEncrypt1(t *testing.T) {
 	leftRotor := NewRotor(
 		alphabet,
 		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-		"A",
+		"E",
 		"R",
 	)
 	middleRotor := NewRotor(
 		alphabet,
 		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
-		"A",
+		"X",
 		"F",
 	)
 	rightRotor := NewRotor(
 		alphabet,
 		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
-		"A",
+		"K",
 		"W",
 	)
 
 	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 
-	message := "AAAAA"
+	message := "HELLO"
 	enigma := Enigma{
 		alphabet: alphabet,
 		reflector: reflectorB,
@@ -37,35 +37,35 @@ func TestMachineEncrypt1(t *testing.T) {
 	
 	actual := enigma.EncryptMessage(message)
 
-	expected := "BDZGO"
+	expected := "JXZOF"
 	if actual != expected {
 		t.Errorf("Expected %s, received %s", string(expected), string(actual))
 	}
 }
 
-func TestMachineEncrypt2(t *testing.T) {
+func TestMachineDecrypt1(t *testing.T) {
 	leftRotor := NewRotor(
 		alphabet,
 		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-		"A",
+		"E",
 		"R",
 	)
 	middleRotor := NewRotor(
 		alphabet,
 		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
-		"Y",
+		"X",
 		"F",
 	)
 	rightRotor := NewRotor(
 		alphabet,
 		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
-		"I",
+		"K",
 		"W",
 	)
 
 	reflector := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 
-	message := "QWERT"
+	message := "JXZOF"
 	enigma := Enigma{
 		alphabet: alphabet,
 		reflector: reflector,
@@ -74,7 +74,7 @@ func TestMachineEncrypt2(t *testing.T) {
 	
 	actual := enigma.EncryptMessage(message)
 
-	expected := "JVKTO"
+	expected := "HELLO"
 	if actual != expected {
 		t.Errorf("Expected %s, received %s", string(expected), string(actual))
 	}
