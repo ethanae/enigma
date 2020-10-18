@@ -1,8 +1,8 @@
-███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗ 
-██╔════╝████╗  ██║██║██╔════╝ ████╗ ████║██╔══██╗
-█████╗  ██╔██╗ ██║██║██║  ███╗██╔████╔██║███████║
-██╔══╝  ██║╚██╗██║██║██║   ██║██║╚██╔╝██║██╔══██║
-███████╗██║ ╚████║██║╚██████╔╝██║ ╚═╝ ██║██║  ██║
+#### ███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗ 
+#### ██╔════╝████╗  ██║██║██╔════╝ ████╗ ████║██╔══██╗
+#### █████╗  ██╔██╗ ██║██║██║  ███╗██╔████╔██║███████║
+#### ██╔══╝  ██║╚██╗██║██║██║   ██║██║╚██╔╝██║██╔══██║
+#### ███████╗██║ ╚████║██║╚██████╔╝██║ ╚═╝ ██║██║  ██║
 
 ### A badly written Enigma machine, but it has ASCII art ¯\_(ツ)_/¯
 
@@ -22,7 +22,7 @@ env GOOS=windows GOARCH=amd64 go build -o ../build/enigma.exe
 ```
 
 ### Usage
-You need a file which describes the configuration or key for the machine.
+You also need a file which describes the configuration or key for the machine.
 
 #### Configuration
 An example configuration file:
