@@ -31,24 +31,24 @@ An example configuration file:
 ```
 {
   "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-  "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
-  "plugboard": "AB, FG, PZ", // A -> B and B -> A, P -> Z and Z -> Z, etc.
+  "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT", // reflector B
+  "plugboard": "AB, FG, PZ", // A -> B and B -> A, P -> Z and Z -> Z, etc. Either empty, or a list of unique non-overlapping pairs
   "rotors": [
     {
       "start": "Q",
-      "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+      "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ", // Rotor 1
       "ring": "E",
       "turnoverLetter": "R"
     },
     {
       "start": "E",
-      "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+      "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE", // Rotor 2
       "ring": "X",
       "turnoverLetter": "F"
     },
     {
       "start": "V",
-      "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+      "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO", // Rotor 3
       "ring": "K",
       "turnoverLetter": "W"
     }
@@ -57,7 +57,7 @@ An example configuration file:
 ```
 
 #### Encrypt things
-With a configuration file at the ready run:
+Run the executable:
 
 ```
 ../build/enigma.sh -c path/to/configuration/file.json 
