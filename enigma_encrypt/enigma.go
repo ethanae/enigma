@@ -16,7 +16,7 @@ func (e *Enigma) EncryptMessage(message string) string {
 	cipher := ""
 
 	for _, letter := range message {
-		index := 0
+		index := -1
 		// pass through plugboard
 		nextLetter := e.plugboard.Map(string(letter))
 
@@ -25,6 +25,10 @@ func (e *Enigma) EncryptMessage(message string) string {
 				index = j
 				break
 			}
+		}
+
+		if index == -1 {
+			return "Invalid input. Character '" + string(letter) + "' not in alphabet '" + e.alphabet + "'"
 		}
 
 		didRotateNextRotors := false
