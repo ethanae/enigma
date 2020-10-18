@@ -33,11 +33,11 @@ func TestMachineEncryptSimple(t *testing.T) {
 
 	message := "HELLO"
 	enigma := Enigma{
-		alphabet: alphabet,
+		alphabet:  alphabet,
 		reflector: reflectorB,
-		rotors: []Rotor{ leftRotor, middleRotor, rightRotor, },
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
-	
+
 	actual := enigma.EncryptMessage(message)
 
 	expected := "JXZOF"
@@ -73,11 +73,11 @@ func TestMachineDecryptSimple(t *testing.T) {
 
 	message := "JXZOF"
 	enigma := Enigma{
-		alphabet: alphabet,
+		alphabet:  alphabet,
 		reflector: reflector,
-		rotors: []Rotor{ leftRotor, middleRotor, rightRotor, },
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
-	
+
 	actual := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
@@ -113,11 +113,11 @@ func TestMachineEcryptSingleNotchRotation(t *testing.T) {
 
 	message := "HELLO"
 	enigma := Enigma{
-		alphabet: alphabet,
+		alphabet:  alphabet,
 		reflector: reflectorB,
-		rotors: []Rotor{ leftRotor, middleRotor, rightRotor, },
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
-	
+
 	actual := enigma.EncryptMessage(message)
 
 	expected := "IAWWT"
@@ -153,11 +153,11 @@ func TestMachineDecryptSingleNotchRotation(t *testing.T) {
 
 	message := "IAWWT"
 	enigma := Enigma{
-		alphabet: alphabet,
+		alphabet:  alphabet,
 		reflector: reflectorB,
-		rotors: []Rotor{ leftRotor, middleRotor, rightRotor, },
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
-	
+
 	actual := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
@@ -193,11 +193,11 @@ func TestMachineEncryptDoubleNotchRotation(t *testing.T) {
 
 	message := "HELLO"
 	enigma := Enigma{
-		alphabet: alphabet,
+		alphabet:  alphabet,
 		reflector: reflectorB,
-		rotors: []Rotor{ leftRotor, middleRotor, rightRotor, },
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
-	
+
 	actual := enigma.EncryptMessage(message)
 
 	expected := "NSAFN"
@@ -233,14 +233,213 @@ func TestMachineDecryptDoubleNotchRotation(t *testing.T) {
 
 	message := "NSAFN"
 	enigma := Enigma{
-		alphabet: alphabet,
+		alphabet:  alphabet,
 		reflector: reflectorB,
-		rotors: []Rotor{ leftRotor, middleRotor, rightRotor, },
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
-	
+
 	actual := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
+
+func TestMachineEncryptTripleNotchRotation(t *testing.T) {
+	leftRotor := NewRotor(
+		alphabet,
+		"Q",
+		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+		"E",
+		"R",
+	)
+	middleRotor := NewRotor(
+		alphabet,
+		"E",
+		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
+		"X",
+		"F",
+	)
+	rightRotor := NewRotor(
+		alphabet,
+		"V",
+		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+		"K",
+		"W",
+	)
+
+	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
+
+	message := "HELLO"
+	enigma := Enigma{
+		alphabet:  alphabet,
+		reflector: reflectorB,
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
+	}
+
+	actual := enigma.EncryptMessage(message)
+
+	expected := "FFETW"
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
+
+func TestMachineDecryptTripleNotchRotation(t *testing.T) {
+	leftRotor := NewRotor(
+		alphabet,
+		"Q",
+		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+		"E",
+		"R",
+	)
+	middleRotor := NewRotor(
+		alphabet,
+		"E",
+		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
+		"X",
+		"F",
+	)
+	rightRotor := NewRotor(
+		alphabet,
+		"V",
+		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+		"K",
+		"W",
+	)
+
+	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
+
+	message := "FFETW"
+	enigma := Enigma{
+		alphabet:  alphabet,
+		reflector: reflectorB,
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
+	}
+
+	actual := enigma.EncryptMessage(message)
+
+	expected := "HELLO"
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
+
+func TestMachineEncryptLongText(t *testing.T) {
+	leftRotor := NewRotor(
+		alphabet,
+		"Q",
+		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+		"E",
+		"R",
+	)
+	middleRotor := NewRotor(
+		alphabet,
+		"E",
+		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
+		"X",
+		"F",
+	)
+	rightRotor := NewRotor(
+		alphabet,
+		"V",
+		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+		"K",
+		"W",
+	)
+
+	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
+
+	message := "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOGTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG"
+	enigma := Enigma{
+		alphabet:  alphabet,
+		reflector: reflectorB,
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
+	}
+
+	actual := enigma.EncryptMessage(message)
+
+	expected := "KVLJBUFICCBYIOIODPWHQTQJZVSTFZXEEYSNODWVQBWAHSIUZFYQFIYFKADTIKTPNLURQK"
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
+
+func TestMachineDecryptLongText(t *testing.T) {
+	leftRotor := NewRotor(
+		alphabet,
+		"Q",
+		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+		"E",
+		"R",
+	)
+	middleRotor := NewRotor(
+		alphabet,
+		"E",
+		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
+		"X",
+		"F",
+	)
+	rightRotor := NewRotor(
+		alphabet,
+		"V",
+		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+		"K",
+		"W",
+	)
+
+	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
+
+	message := "KVLJBUFICCBYIOIODPWHQTQJZVSTFZXEEYSNODWVQBWAHSIUZFYQFIYFKADTIKTPNLURQK"
+	enigma := Enigma{
+		alphabet:  alphabet,
+		reflector: reflectorB,
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
+	}
+
+	actual := enigma.EncryptMessage(message)
+
+	expected := "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOGTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG"
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
+
+func TestMachineEncryptExtraLongText(t *testing.T) {
+	leftRotor := NewRotor(
+		alphabet,
+		"X",
+		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+		"G",
+		"R",
+	)
+	middleRotor := NewRotor(
+		alphabet,
+		"Z",
+		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
+		"W",
+		"F",
+	)
+	rightRotor := NewRotor(
+		alphabet,
+		"N",
+		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+		"Z",
+		"W",
+	)
+
+	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
+
+	message := "SEDUTPERSPICIATISUNDEOMNISISTENATUSERRORSITVOLUPTATEMACCUSANTIUMDOLOREMQUELAUDANTIUMTOTAMREMAPERIAMEAQUEIPSAQUAEABILLOINVENTOREVERITATISETQUASIARCHITECTOBEATAEVITAEDICTASUNTEXPLICABONEMOENIMIPSAMVOLUPTATEMQUIAVOLUPTASSITASPERNATURAUTODITAUTFUGITSEDQUIACONSEQUUNTURMAGNIDOLORESEOSQUIRATIONEVOLUPTATEMSEQUINESCIUNTNEQUEPORROQUISQUAMESTQUIDOLOREMIPSUMQUIADOLORSITAMETCONSECTETURADIPISCIVELITSEDQUIANONNUMQUAMEIUSMODITEMPORAINCIDUNTUTLABOREETDOLOREMAGNAMALIQUAMQUAERATVOLUPTATEMUTENIMADMINIMAVENIAMQUISNOSTRUMEXERCITATIONEMULLAMCORPORISSUSCIPITLABORIOSAMNISIUTALIQUIDEXEACOMMODICONSEQUATURQUISAUTEMVELEUMIUREREPREHENDERITQUIINEAVOLUPTATEVELITESSEQUAMNIHILMOLESTIAECONSEQUATURVELILLUMQUIDOLOREMEUMFUGIATQUOVOLUPTASNULLAPARIATUR"
+	enigma := Enigma{
+		alphabet:  alphabet,
+		reflector: reflectorB,
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
+	}
+
+	actual := enigma.EncryptMessage(message)
+	expected := "LTQLROOOINCLFPZAKZTVDGBPGXPAQMJUMGZNKVDJHLGHGCXEETPNUMOLNZHFMXAQSTPGNJXVKPQUFZJJJCAPDJQIEQWSIRRNMZUCVSAJYLRLSBHKQDQGUCEUZBIMKKUSCUGXMPUAQOUKQNJIWKWAVUOQHMZKXFFTSMCJOTLDEPDUMCBMGJALCYQYWEXRSOBWBUXAFCHURYRRWHHQLLCXNMKVQHTQCEIVDOWWOBDXZVHYSHRIPJIKQYGKSXTKLVZGWMROWNDLZZXGYSANTZJWRPXBLHQRNJPRYKJPTRKGPORNNLWCEGJADPLQDXCQAGUZFUBJSZGMSFTPPGIPBHUDBSENYEERUBZTBFCTPOOEOKGVNQRRTBHOVSVXECZBVBYRJDBLOTSEIJGGKXISVUJZPBCEPRDVJOOXUVLFHLOFKVXLCCYSMIPURQLQQRZTAHQCCVROODZBLCSSDKTWJQKVTVFSBGVFUFWSVKJVVOXUSCYCQBJTCBFHREWTNYUMKRWJVUBWWJLTBZUDJNYSLFEEVBBKGBYEMMMCUWHTNVTCYWVWEAOCCYWSIPKNQXDAXEHMETYDVBYNOOCTCRCJYACCKBWYRNTYFQTZLTRLLMXXGKZZUYRVYZDXHWTATJMOGQGUQKGSEPRRFYNTATDFZFVXDWMHQMOMVOLWOMOGGZHYPKUDYTIYJIHRQMBTYRMZEYCTVNIHLLMCCEIIIZYMLM"
 	if actual != expected {
 		t.Errorf("Expected %s, received %s", string(expected), string(actual))
 	}

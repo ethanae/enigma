@@ -1,12 +1,8 @@
 package main
 
-import (
-	"fmt"
-)
-
 type Rotor struct {
-	in string
-	out string
+	in       string
+	out      string
 	turnover string
 }
 
@@ -14,7 +10,6 @@ func (r *Rotor) EncodeRL(index int) int {
 	outChar := rune(r.out[index])
 	for i, v := range r.in {
 		if v == outChar {
-			fmt.Printf("Enter at %s, exit at %s\n", string(r.in[index]), string(outChar))
 			return i
 		}
 	}
@@ -26,7 +21,6 @@ func (r *Rotor) EncodeLR(index int) int {
 	inChar := rune(r.in[index])
 	for i, v := range r.out {
 		if v == inChar {
-			fmt.Printf("Enter at %s, exit at %s\n", string(inChar), string(r.in[i]))
 			return i
 		}
 	}
@@ -34,11 +28,15 @@ func (r *Rotor) EncodeLR(index int) int {
 	return -1
 }
 
-func (r *Rotor) Rotate() bool { 
+func (r *Rotor) Rotate() bool {
 	r.in = r.in[1:] + string(r.in[0])
 	r.out = r.out[1:] + string(r.out[0])
-
 	return string(r.in[0]) == r.turnover
+}
+
+func (r *Rotor) RatchedEngaged() bool {
+	window := rune(r.turnover[0])
+	return string(r.in[0]) == string(window-1)
 }
 
 func NewRotor(
@@ -47,7 +45,7 @@ func NewRotor(
 	wiring string,
 	ringSetting string,
 	turnover string,
-	) Rotor {
+) Rotor {
 	var shift int32 = 0
 	for _, value := range alphabet {
 		if string(value) == ringSetting {
@@ -74,8 +72,8 @@ func NewRotor(
 	}
 
 	rotor := Rotor{
-		in: alphabet,
-		out: shiftedWiring,
+		in:       alphabet,
+		out:      shiftedWiring,
 		turnover: turnover,
 	}
 

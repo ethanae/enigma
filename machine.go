@@ -1,17 +1,13 @@
 package main
 
-import (
-	"fmt"
-)
-
 type Enigma struct {
-	rotors []Rotor
-	alphabet string
+	rotors    []Rotor
+	alphabet  string
 	reflector string
 }
 
 func (e *Enigma) EncryptMessage(message string) string {
-	
+
 	rotors := e.rotors
 	rotorCount := len(rotors)
 	cipher := ""
@@ -25,8 +21,16 @@ func (e *Enigma) EncryptMessage(message string) string {
 			}
 		}
 
+		didRotateNextRotors := false
+		// println("Rotors", string(rotors[0].in[0]), string(rotors[1].in[0]), string(rotors[2].in[0]))
 		for i := rotorCount - 1; i > -1; i-- {
-			if i == rotorCount - 1 {
+			if i == rotorCount-1 {
+				if rotors[i].Rotate() {
+					// turn next rotors
+					didRotateNextRotors = true
+					e.HandleNotchRotations(i - 1)
+				}
+			} else if !didRotateNextRotors && rotors[i].RatchedEngaged() {
 				if rotors[i].Rotate() {
 					// turn next rotors
 					e.HandleNotchRotations(i - 1)
@@ -37,7 +41,7 @@ func (e *Enigma) EncryptMessage(message string) string {
 
 		index = e.Reflect(index)
 
-		for _, rotorX := range e.rotors  {
+		for _, rotorX := range e.rotors {
 			index = rotorX.EncodeLR(index)
 		}
 
@@ -48,8 +52,10 @@ func (e *Enigma) EncryptMessage(message string) string {
 }
 
 func (e *Enigma) HandleNotchRotations(rotorToTurn int) {
-	if e.rotors[rotorToTurn].Rotate() {
-		e.HandleNotchRotations(rotorToTurn - 1)
+	if rotorToTurn != -1 {
+		if e.rotors[rotorToTurn].Rotate() {
+			e.HandleNotchRotations(rotorToTurn - 1)
+		}
 	}
 }
 
@@ -57,9 +63,8 @@ func (e *Enigma) Reflect(index int) int {
 	reflected := rune(e.reflector[index])
 	for i, v := range e.alphabet {
 		if reflected == v {
-			fmt.Printf("Enter at %s, reflected as %s \n", string(reflected), string(e.alphabet[i]))
 			return i
 		}
 	}
-	return -1;
+	return -1
 }
