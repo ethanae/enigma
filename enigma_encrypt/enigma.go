@@ -73,7 +73,7 @@ func (e *Enigma) HandleNotchRotations(rotorToTurn int) {
 	}
 }
 
-// Reflect mimics the behaviour of the reflector which just maps an incoming letter to an output letter
+// Reflect mimics the behaviour of the reflector on a physical machine which maps an incoming letter to an output letter
 func (e *Enigma) Reflect(index int) int {
 	reflected := rune(e.reflector[index])
 	for i, v := range e.alphabet {

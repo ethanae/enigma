@@ -1,0 +1,25 @@
+{
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+  "plugboard": "",
+  "rotors": [
+    {
+      "start": "Q",
+      "wiring": "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+      "ring": "E",
+      "turnoverLetter": "R"
+    },
+    {
+      "start": "E",
+      "wiring": "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+      "ring": "X",
+      "turnoverLetter": "F"
+    },
+    {
+      "start": "V",
+      "wiring": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+      "ring": "K",
+      "turnoverLetter": "W"
+    }
+  ]
+}

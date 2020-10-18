@@ -6,7 +6,7 @@ import (
 
 func TestRotateAndEncodeLRA(t *testing.T) {
 	r := Rotor{
-		in: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		in:  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 		out: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
 	}
 
@@ -21,7 +21,7 @@ func TestRotateAndEncodeLRA(t *testing.T) {
 
 func TestRotateTwiceAndEncodeLRA(t *testing.T) {
 	r := Rotor{
-		in: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		in:  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 		out: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
 	}
 
@@ -38,7 +38,7 @@ func TestRotateTwiceAndEncodeLRA(t *testing.T) {
 
 func TestRotateTwiceAndEncodeRLA(t *testing.T) {
 	r := Rotor{
-		in: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+		in:  "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 		out: "BDFHJLCPRTXVZNYEIWGAKMUSQO",
 	}
 
@@ -46,7 +46,7 @@ func TestRotateTwiceAndEncodeRLA(t *testing.T) {
 	outIndex1 := r.EncodeRL(0)
 	r.Rotate()
 	outIndex2 := r.EncodeRL(0)
-	
+
 	expected1 := alphabet[2]
 	actual1 := alphabet[outIndex1]
 	if actual1 != expected1 {
