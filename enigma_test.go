@@ -38,7 +38,7 @@ func TestMachineEncryptSimple(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "JXZOF"
 	if actual != expected {
@@ -78,7 +78,7 @@ func TestMachineDecryptSimple(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
 	if actual != expected {
@@ -118,7 +118,7 @@ func TestMachineEcryptSingleNotchRotation(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "IAWWT"
 	if actual != expected {
@@ -158,7 +158,7 @@ func TestMachineDecryptSingleNotchRotation(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
 	if actual != expected {
@@ -198,7 +198,7 @@ func TestMachineEncryptDoubleNotchRotation(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "NSAFN"
 	if actual != expected {
@@ -238,7 +238,7 @@ func TestMachineDecryptDoubleNotchRotation(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
 	if actual != expected {
@@ -278,7 +278,7 @@ func TestMachineEncryptTripleNotchRotation(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "FFETW"
 	if actual != expected {
@@ -318,7 +318,7 @@ func TestMachineDecryptTripleNotchRotation(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
 	if actual != expected {
@@ -358,7 +358,7 @@ func TestMachineEncryptLongText(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "KVLJBUFICCBYIOIODPWHQTQJZVSTFZXEEYSNODWVQBWAHSIUZFYQFIYFKADTIKTPNLURQK"
 	if actual != expected {
@@ -398,7 +398,7 @@ func TestMachineDecryptLongText(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOGTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG"
 	if actual != expected {
@@ -438,7 +438,7 @@ func TestMachineEncryptExtraLongText(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 	expected := "LTQLROOOINCLFPZAKZTVDGBPGXPAQMJUMGZNKVDJHLGHGCXEETPNUMOLNZHFMXAQSTPGNJXVKPQUFZJJJCAPDJQIEQWSIRRNMZUCVSAJYLRLSBHKQDQGUCEUZBIMKKUSCUGXMPUAQOUKQNJIWKWAVUOQHMZKXFFTSMCJOTLDEPDUMCBMGJALCYQYWEXRSOBWBUXAFCHURYRRWHHQLLCXNMKVQHTQCEIVDOWWOBDXZVHYSHRIPJIKQYGKSXTKLVZGWMROWNDLZZXGYSANTZJWRPXBLHQRNJPRYKJPTRKGPORNNLWCEGJADPLQDXCQAGUZFUBJSZGMSFTPPGIPBHUDBSENYEERUBZTBFCTPOOEOKGVNQRRTBHOVSVXECZBVBYRJDBLOTSEIJGGKXISVUJZPBCEPRDVJOOXUVLFHLOFKVXLCCYSMIPURQLQQRZTAHQCCVROODZBLCSSDKTWJQKVTVFSBGVFUFWSVKJVVOXUSCYCQBJTCBFHREWTNYUMKRWJVUBWWJLTBZUDJNYSLFEEVBBKGBYEMMMCUWHTNVTCYWVWEAOCCYWSIPKNQXDAXEHMETYDVBYNOOCTCRCJYACCKBWYRNTYFQTZLTRLLMXXGKZZUYRVYZDXHWTATJMOGQGUQKGSEPRRFYNTATDFZFVXDWMHQMOMVOLWOMOGGZHYPKUDYTIYJIHRQMBTYRMZEYCTVNIHLLMCCEIIIZYMLM"
 	if actual != expected {
 		t.Errorf("Expected %s, received %s", string(expected), string(actual))
@@ -477,7 +477,7 @@ func TestMachineDecryptExtraLongText(t *testing.T) {
 		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 	expected := "SEDUTPERSPICIATISUNDEOMNISISTENATUSERRORSITVOLUPTATEMACCUSANTIUMDOLOREMQUELAUDANTIUMTOTAMREMAPERIAMEAQUEIPSAQUAEABILLOINVENTOREVERITATISETQUASIARCHITECTOBEATAEVITAEDICTASUNTEXPLICABONEMOENIMIPSAMVOLUPTATEMQUIAVOLUPTASSITASPERNATURAUTODITAUTFUGITSEDQUIACONSEQUUNTURMAGNIDOLORESEOSQUIRATIONEVOLUPTATEMSEQUINESCIUNTNEQUEPORROQUISQUAMESTQUIDOLOREMIPSUMQUIADOLORSITAMETCONSECTETURADIPISCIVELITSEDQUIANONNUMQUAMEIUSMODITEMPORAINCIDUNTUTLABOREETDOLOREMAGNAMALIQUAMQUAERATVOLUPTATEMUTENIMADMINIMAVENIAMQUISNOSTRUMEXERCITATIONEMULLAMCORPORISSUSCIPITLABORIOSAMNISIUTALIQUIDEXEACOMMODICONSEQUATURQUISAUTEMVELEUMIUREREPREHENDERITQUIINEAVOLUPTATEVELITESSEQUAMNIHILMOLESTIAECONSEQUATURVELILLUMQUIDOLOREMEUMFUGIATQUOVOLUPTASNULLAPARIATUR"
 	if actual != expected {
 		t.Errorf("Expected %s, received %s", string(expected), string(actual))
@@ -520,7 +520,7 @@ func TestMachineEncryptSimpleWithPlugboard(t *testing.T) {
 		},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "CAUSC"
 	if actual != expected {
@@ -564,7 +564,7 @@ func TestMachineDecryptSimpleWithPlugboard(t *testing.T) {
 		},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "HELLO"
 	if actual != expected {
@@ -608,7 +608,7 @@ func TestMachineEncryptWithPlugboard(t *testing.T) {
 		},
 	}
 
-	actual := enigma.EncryptMessage(message)
+	actual, _ := enigma.EncryptMessage(message)
 
 	expected := "YYTZTJGTALIAHUCOTNXYYPCFOOOBRUGNSWDGFWOYGVWUPUICSCOZIXAYGLLCPJXHSQRPEB"
 	if actual != expected {
