@@ -527,3 +527,91 @@ func TestMachineEncryptSimpleWithPlugboard(t *testing.T) {
 		t.Errorf("Expected %s, received %s", string(expected), string(actual))
 	}
 }
+
+func TestMachineDecryptSimpleWithPlugboard(t *testing.T) {
+	leftRotor := NewRotor(
+		alphabet,
+		"A",
+		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+		"E",
+		"R",
+	)
+	middleRotor := NewRotor(
+		alphabet,
+		"A",
+		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
+		"X",
+		"F",
+	)
+	rightRotor := NewRotor(
+		alphabet,
+		"A",
+		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+		"K",
+		"W",
+	)
+
+	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
+
+	message := "CAUSC"
+	enigma := Enigma{
+		alphabet:  alphabet,
+		reflector: reflectorB,
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
+		plugboard: Plugboard{
+			in:  "BCDEKMOPUG",
+			out: "QRIJWTSXZH",
+		},
+	}
+
+	actual := enigma.EncryptMessage(message)
+
+	expected := "HELLO"
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
+
+func TestMachineEncryptWithPlugboard(t *testing.T) {
+	leftRotor := NewRotor(
+		alphabet,
+		"K",
+		"EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+		"E",
+		"R",
+	)
+	middleRotor := NewRotor(
+		alphabet,
+		"W",
+		"AJDKSIRUXBLHWTMCQGZNPYFVOE",
+		"X",
+		"F",
+	)
+	rightRotor := NewRotor(
+		alphabet,
+		"T",
+		"BDFHJLCPRTXVZNYEIWGAKMUSQO",
+		"K",
+		"W",
+	)
+
+	reflectorB := "YRUHQSLDPXNGOKMIEBFZCWVJAT"
+
+	message := "THEQUICKBROWNFOXJUMPSOVERTHELAZYDOGTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG"
+	enigma := Enigma{
+		alphabet:  alphabet,
+		reflector: reflectorB,
+		rotors:    []Rotor{leftRotor, middleRotor, rightRotor},
+		plugboard: Plugboard{
+			in:  "YQEX",
+			out: "MWAF",
+		},
+	}
+
+	actual := enigma.EncryptMessage(message)
+
+	expected := "YYTZTJGTALIAHUCOTNXYYPCFOOOBRUGNSWDGFWOYGVWUPUICSCOZIXAYGLLCPJXHSQRPEB"
+	if actual != expected {
+		t.Errorf("Expected %s, received %s", string(expected), string(actual))
+	}
+}
