@@ -13,10 +13,8 @@ func (pb *Plugboard) Map(letter string) string {
 		if string(l) == letter {
 			return string(pb.out[i])
 		}
-	}
-	for i, l := range pb.out {
-		if string(l) == letter {
-			return string(pb.in[i])
+		if string(pb.out[i]) == letter {
+			return string(l)
 		}
 	}
 	return letter
