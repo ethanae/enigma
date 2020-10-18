@@ -1,11 +1,5 @@
-```
-███████╗███╗   ██╗██╗ ██████╗ ███╗   ███╗ █████╗ 
-██╔════╝████╗  ██║██║██╔════╝ ████╗ ████║██╔══██╗
-█████╗  ██╔██╗ ██║██║██║  ███╗██╔████╔██║███████║
-██╔══╝  ██║╚██╗██║██║██║   ██║██║╚██╔╝██║██╔══██║
-███████╗██║ ╚████║██║╚██████╔╝██║ ╚═╝ ██║██║  ██║
-```
-### A badly written Enigma machine, but it has ASCII art ¯\_(ツ)_/¯
+## A badly written Enigma machine
+#### but it has ASCII art ¯\_(ツ)_/¯
 
 ### Build
 You'll need the Golang build tools to build an executable.
