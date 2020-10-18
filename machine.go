@@ -1,5 +1,7 @@
 package main
 
+// Enigma mimics the internal organisation of a physical Enigma machine
+// Each machine has a plugboard, a number of rotors, and a reflector
 type Enigma struct {
 	rotors    []Rotor
 	alphabet  string
@@ -7,6 +9,7 @@ type Enigma struct {
 	plugboard Plugboard
 }
 
+// EncryptMessage takes a full plaintext message and produces the ciphertext determined by the machine's configuration (key)
 func (e *Enigma) EncryptMessage(message string) string {
 	rotors := e.rotors
 	rotorCount := len(rotors)
@@ -61,6 +64,7 @@ func (e *Enigma) EncryptMessage(message string) string {
 	return cipher
 }
 
+// HandleNotchRotations ensures that a rotation of one rotor may end up rotating multiple adjacent rotors
 func (e *Enigma) HandleNotchRotations(rotorToTurn int) {
 	if rotorToTurn != -1 {
 		if e.rotors[rotorToTurn].Rotate() {
@@ -69,6 +73,7 @@ func (e *Enigma) HandleNotchRotations(rotorToTurn int) {
 	}
 }
 
+// Reflect mimics the behaviour of the reflector which just maps an incoming letter to an output letter
 func (e *Enigma) Reflect(index int) int {
 	reflected := rune(e.reflector[index])
 	for i, v := range e.alphabet {
