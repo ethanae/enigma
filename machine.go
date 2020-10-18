@@ -4,25 +4,27 @@ type Enigma struct {
 	rotors    []Rotor
 	alphabet  string
 	reflector string
+	plugboard Plugboard
 }
 
 func (e *Enigma) EncryptMessage(message string) string {
-
 	rotors := e.rotors
 	rotorCount := len(rotors)
 	cipher := ""
 
 	for _, letter := range message {
 		index := 0
+		// pass through plugboard
+		nextLetter := e.plugboard.Map(string(letter))
+
 		for j, c := range e.alphabet {
-			if string(c) == string(letter) {
+			if string(c) == nextLetter {
 				index = j
 				break
 			}
 		}
 
 		didRotateNextRotors := false
-		// println("Rotors", string(rotors[0].in[0]), string(rotors[1].in[0]), string(rotors[2].in[0]))
 		for i := rotorCount - 1; i > -1; i-- {
 			if i == rotorCount-1 {
 				if rotors[i].Rotate() {
@@ -43,6 +45,14 @@ func (e *Enigma) EncryptMessage(message string) string {
 
 		for _, rotorX := range e.rotors {
 			index = rotorX.EncodeLR(index)
+		}
+
+		nextLetter = e.plugboard.Map(string(e.alphabet[index]))
+
+		for i, l := range e.alphabet {
+			if string(l) == nextLetter {
+				index = i
+			}
 		}
 
 		cipher += string(e.alphabet[index])
