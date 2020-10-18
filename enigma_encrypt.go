@@ -53,7 +53,13 @@ func main() {
 		fmt.Println("------------")
 		fmt.Print("plaintext  > ")
 		plaintext = readPlainText()
-		ciphertext = enigma.EncryptMessage(plaintext)
+		ciphertext, err = enigma.EncryptMessage(plaintext)
+		if err != nil {
+			fmt.Println("Error:", err.Error())
+			// rebuild the machine resetting any rotations
+			enigma = NewEnigma(enigmaConfig)
+			continue
+		}
 		fmt.Printf("ciphertext > %s\n", ciphertext)
 		fmt.Println("------------")
 	}

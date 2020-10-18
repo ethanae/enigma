@@ -10,14 +10,14 @@ type RotorConfiguration struct {
 }
 
 type EnigmaConfiguration struct {
-	Rotors               []RotorConfiguration `json:"rotors"`
-	Alphabet             string               `json:"alphabet"`
-	Reflector            string               `json:"reflector"`
-	PlugboardConnections string               `json:"plugboardConnections"`
+	Rotors    []RotorConfiguration `json:"rotors"`
+	Alphabet  string               `json:"alphabet"`
+	Reflector string               `json:"reflector"`
+	Plugboard string               `json:"plugboard"`
 }
 
 func NewEnigma(config EnigmaConfiguration) Enigma {
-	plugboardPairs := strings.Split(strings.Replace(config.PlugboardConnections, " ", "", -1), "")
+	plugboardPairs := strings.Split(strings.Replace(config.Plugboard, " ", "", -1), ",")
 	plugboardIn := ""
 	plugboardOut := ""
 

@@ -1,5 +1,9 @@
 package main
 
+import (
+	"errors"
+)
+
 // Enigma mimics the internal organisation of a physical Enigma machine
 // Each machine has a plugboard, a number of rotors, and a reflector
 type Enigma struct {
@@ -10,7 +14,7 @@ type Enigma struct {
 }
 
 // EncryptMessage takes a full plaintext message and produces the ciphertext determined by the machine's configuration (key)
-func (e *Enigma) EncryptMessage(message string) string {
+func (e *Enigma) EncryptMessage(message string) (string, error) {
 	rotors := e.rotors
 	rotorCount := len(rotors)
 	cipher := ""
@@ -28,7 +32,7 @@ func (e *Enigma) EncryptMessage(message string) string {
 		}
 
 		if index == -1 {
-			return "Invalid input. Character '" + string(letter) + "' not in alphabet '" + e.alphabet + "'"
+			return "", errors.New("Invalid input. Character '" + string(letter) + "' not in alphabet '" + e.alphabet + "'")
 		}
 
 		didRotateNextRotors := false
@@ -65,7 +69,7 @@ func (e *Enigma) EncryptMessage(message string) string {
 		cipher += string(e.alphabet[index])
 	}
 
-	return cipher
+	return cipher, nil
 }
 
 // HandleNotchRotations ensures that a rotation of one rotor may end up rotating multiple adjacent rotors
