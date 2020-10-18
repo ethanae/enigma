@@ -24,8 +24,8 @@ func main() {
 	flag.StringVar(
 		&configFilePath,
 		"c",
-		"./config.json",
-		"Specify your configuration file. Default is ./config.json",
+		"",
+		"Specify your configuration file.",
 	)
 
 	flag.Usage = func() {
