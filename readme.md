@@ -70,5 +70,5 @@ Run the executable:
 Or, for Windows:
 
 ```
-../build/enigma.exe -c path/to/configuration/file.json 
+..\build\enigma.exe -c path\to\configuration\file.json 
 ```
