@@ -26,6 +26,12 @@ env GOOS=windows GOARCH=amd64 go build -o ../build/enigma.exe
 You also need a file which describes the configuration or key for the machine.
 
 #### Configuration
+Every configuration file must have:
+- a rotors array with all fields required for a rotor
+- an alphabet
+- a reflector
+- plugboard (optional)
+
 An example configuration file:
 ```
 {
