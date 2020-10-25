@@ -1,6 +1,8 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 type RotorConfiguration struct {
 	Start          string `json:"start"`
@@ -17,13 +19,15 @@ type EnigmaConfiguration struct {
 }
 
 func NewEnigma(config EnigmaConfiguration) Enigma {
-	plugboardPairs := strings.Split(strings.Replace(config.Plugboard, " ", "", -1), ",")
 	plugboardIn := ""
 	plugboardOut := ""
 
-	for _, pair := range plugboardPairs {
-		plugboardIn += string(pair[0])
-		plugboardOut += string(pair[1])
+	if config.Plugboard != "" {
+		plugboardPairs := strings.Split(strings.Replace(config.Plugboard, " ", "", -1), ",")
+		for _, pair := range plugboardPairs {
+			plugboardIn += string(pair[0])
+			plugboardOut += string(pair[1])
+		}
 	}
 
 	rotors := []Rotor{}

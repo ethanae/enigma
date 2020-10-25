@@ -4,8 +4,8 @@ class Reflector:
     self.output = output
 
   def reflect(self, index):
-    reflected = output[index]
-    for i, c in self.alphabet:
+    reflected = self.output[index]
+    for i, c in enumerate(self.alphabet):
       if reflected == c:
         return i
     return -1

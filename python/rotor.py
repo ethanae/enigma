@@ -3,7 +3,7 @@ class Rotor:
   def __init__(self, start, alphabet, wiring, ringSetting, turnover):
     # determine the shift for the ring setting
     shift = 0
-    for i, c in alphabet:
+    for c in alphabet:
       if c == ringSetting:
         break
       shift += 1
@@ -14,7 +14,7 @@ class Rotor:
     dotPosition = 0
 
     # shift all the wiring based on the shift distance
-    for i, c in wiring:
+    for i, c in enumerate(wiring):
       if c == "A":
         dotPosition = (i + shift) % alphabetLen
       index = (ord(c) - firstAlphaChar + shift) % alphabetLen
@@ -34,14 +34,14 @@ class Rotor:
 
   def encode_rl(self, index):
     outChar = self.output[index]
-    for i, c in self.input:
+    for i, c in enumerate(self.input):
       if c == outChar:
         return i
     return -1
 
   def encode_lr(self, index):
     inChar = self.input[index]
-    for i, c in self.output:
+    for i, c in enumerate(self.output):
       if c == inChar:
         return i
     return -1

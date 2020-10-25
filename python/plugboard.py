@@ -4,7 +4,7 @@ class Plugboard:
     self.output = output
 
   def map(self, letter):
-    for i, c in self.input:
+    for i, c in enumerate(self.input):
       if c == letter:
         return self.output[i]
       if self.output[i] == letter:
