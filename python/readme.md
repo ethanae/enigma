@@ -50,5 +50,5 @@ An example configuration file:
 Run the using python 3:
 
 ```
-python --config path/to/configuration/file.json 
+python main.py --config path/to/configuration/file.json 
 ```
