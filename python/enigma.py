@@ -1,9 +1,30 @@
+from python.rotor import Rotor 
+from python.plugboard import Plugboard 
+
 class Enigma:
   def __init__(self, rotors, alphabet, reflector, plugboard):
-    self.rotors = rotors
+    plugboardPairs = plugboard.replace(" ", "").split(",")
+    plugboardIn = ""
+    plugboardOut = ""
+
+    for pair in plugboardPairs:
+      plugboardIn += pair[0]
+      plugboardOut += pair[1]
+
+    builtRotors = []
+    for r in rotors:
+      builtRotors.append(Rotor(
+        r.start,
+        r.alphabet,
+        r.wiring,
+        r.ringSetting,
+        r.turnover
+      ))
+    
+    self.rotors = builtRotors
     self.alphabet = alphabet
     self.reflector = reflector
-    self.plugboard = plugboard
+    self.plugboard = Plugboard(plugboardIn, plugboardOut)
   
   def encrypt(self, plaintext):
     rotors = self.rotors
