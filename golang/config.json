@@ -1,7 +1,7 @@
 {
   "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   "reflector": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
-  "plugboard": "",
+  "plugboard": "AB, FG, PZ",
   "rotors": [
     {
       "start": "Q",
