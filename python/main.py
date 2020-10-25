@@ -25,7 +25,12 @@ def main():
 
   user_input = ""
   output = ""
+  rotorPositions = ""
+  for r in enigma.rotors:
+      rotorPositions += r.input[0] + " "
+  print("Rotor positions: " + rotorPositions)
   while True:
+    rotorPositions = ""
     print("------------")
     user_input = input("plaintext  > ")
     try:
@@ -40,6 +45,9 @@ def main():
       )
       continue
     print("output  > " + output)
+    for r in enigma.rotors:
+      rotorPositions += r.input[0] + " "
+    print("Rotor positions: " + rotorPositions)
     print("------------")
 
 def read_config_file(path):
