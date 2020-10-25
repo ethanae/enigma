@@ -15,7 +15,8 @@ class Rotor:
 
     # shift all the wiring based on the shift distance
     for i, c in enumerate(wiring):
-      if c == "A":
+      # dot position is always assumed to be the first character in the ordered alphabet
+      if c == alphabet[0]:
         dotPosition = (i + shift) % alphabetLen
       index = (ord(c) - firstAlphaChar + shift) % alphabetLen
       shiftedChar = alphabet[index]
