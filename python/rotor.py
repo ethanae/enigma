@@ -51,7 +51,7 @@ class Rotor:
     self.output = self.output[1:] + self.output[0]
     return self.input[0] == self.turnover
 
-  def ratchetEngaged(self):
+  def ratchet_engaged(self):
     window = ord(self.turnover)
     return self.input[0] == chr(window - 1)
   
