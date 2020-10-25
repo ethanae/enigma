@@ -32,7 +32,7 @@ def main():
   while True:
     rotorPositions = ""
     print("------------")
-    user_input = input("plaintext  > ")
+    user_input = input("input  > ")
     try:
       output = enigma.encrypt(user_input)
     except Exception as e:
@@ -44,7 +44,7 @@ def main():
         config['plugboard']
       )
       continue
-    print("output  > " + output)
+    print("output > " + output)
     for r in enigma.rotors:
       rotorPositions += r.input[0] + " "
     print("Rotor positions: " + rotorPositions)
