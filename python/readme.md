@@ -47,7 +47,7 @@ An example configuration file:
 ```
 
 #### Encrypt/descrypt things
-Run the using python 3:
+Run the program - python3 only:
 
 ```
 python main.py --config path/to/configuration/file.json 
